@@ -17,37 +17,29 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
-
-        public void Add(Car car)
+        public void AddCar(Car car)
         {
-            //rules
-            _carDal.Add(car);
-        }
-
-        public void Delete(Car car)
-        {
-            //rules
-            _carDal.Delete(car);
-
+            if (car.Description.Length >= 2 && car.DailyPrice>0)
+                _carDal.Add(car);
         }
 
         public List<Car> GetAll()
         {
-            //rules
+            //İş kuralları
             return _carDal.GetAll();
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByBrandId(int id)
         {
-            //rules
-            return _carDal.GetById(id);
+            //İş Kuralları
+
+            return _carDal.GetAll(w => w.BrandId == id);
         }
 
-        public void Update(Car car)
+        public List<Car> GetCarsByColorId(int id)
         {
-            //rules
-            _carDal.Update(car);
+            //İş kuralları
+            return _carDal.GetAll(w => w.ColorId == id);
         }
     }
 }
